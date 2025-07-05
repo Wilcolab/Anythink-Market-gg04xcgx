@@ -4,7 +4,7 @@
 This project provides a task management API with both Python (FastAPI) and Node.js (Express) implementations.
 
 ## Servers
-- **Python Server**: FastAPI server running on port 8000
+- **Python Server**: FastAPI server running on port 8001
 - **Node.js Server**: Express server running on port 3000
 
 ## API Endpoints
