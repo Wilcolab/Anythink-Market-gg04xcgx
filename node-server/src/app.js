@@ -34,10 +34,9 @@ const isValidTaskIndex = (index, tasksArray) => {
 
 // Routes
 
-// Root endpoint - matches Python server's GET /
-// Simple health check that returns a greeting
+// Root endpoint - matches Python server's root endpoint
 app.get('/', (req, res) => {
-  res.json("Hello World");
+  res.send('Hello World');
 });
 
 // Get all tasks - matches Python server's GET /tasks
@@ -62,7 +61,7 @@ app.post('/tasks', (req, res) => {
   
   // Add the task to our in-memory storage
   tasks.push(text.trim());
-  res.json({ message: 'Task added successfully' });
+  res.status(201).json({ message: 'Task added successfully' });
 });
 
 // Enhanced endpoints - these extend beyond the Python server functionality
