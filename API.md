@@ -1,10 +1,13 @@
 # API Documentation
 
 ## Overview
-This project provides a task management API with both Python (FastAPI) and Node.js (Express) implementations.
+T### Get all tasks
+```bash
+curl http://localhost:8000/tasks
+```project provides a task management API with both Python (FastAPI) and Node.js (Express) implementations.
 
 ## Servers
-- **Python Server**: FastAPI server running on port 8001
+- **Python Server**: FastAPI server running on port 8000
 - **Node.js Server**: Express server running on port 3000
 
 ## API Endpoints

@@ -11,7 +11,7 @@ This document outlines the migration process from a Python FastAPI server to a N
 | Language | Python 3.9 | Node.js 18 |
 | Package Manager | pip | npm |
 | Runtime | uvicorn | node |
-| Port | 8001 | 3000 |
+| Port | 8000 | 3000 |
 
 ## Code Structure Comparison
 
