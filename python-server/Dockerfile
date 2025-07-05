@@ -10,8 +10,12 @@ COPY requirements.txt /app
 # Install the dependencies
 RUN pip install --no-cache-dir -r requirements.txt
 
-# Expose the port on which the server will run
-EXPOSE 8000
+# Copy the source code to the working directory
+COPY src /app/src
 
-# Set the command to run the server
-CMD ["uvicorn", "src.main:app", "--reload", "--host", "0.0.0.0", "--port", "8000"]
+# Expose the ports on which the server will run
+EXPOSE 8000
+EXPOSE 8001
+
+# Set the command to run both servers
+CMD ["sh", "-c", "uvicorn src.main:app --reload --host 0.0.0.0 --port 8000 & uvicorn src.main:app --reload --host 0.0.0.0 --port 8001"]

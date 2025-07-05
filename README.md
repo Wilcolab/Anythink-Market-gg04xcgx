@@ -1,39 +1,123 @@
-# Python Server
+# Task Management Servers
 
-This project contains a FastAPI server implemented in Python. It provides two routes for managing a task list.
+This project contains both Python FastAPI and Node.js Express implementations of a task management API. It demonstrates server migration from Python to Node.js while maintaining feature parity and adding enhancements.
 
 ## Project Structure
 
 The project has the following files and directories:
 
-- `python-server/src/main.py`: This file contains the implementation of the FastAPI server with two routes. It handles adding a task to a list and retrieving the list.
+### Python Server (FastAPI)
+- `python-server/src/main.py`: FastAPI server implementation with basic task management routes
+- `python-server/src/__init__.py`: Python package marker file
+- `python-server/requirements.txt`: Python dependencies (uvicorn, fastapi)
+- `python-server/Dockerfile`: Docker configuration for Python server
 
-- `python-server/src/__init__.py`: This file is an empty file that marks the `src` directory as a Python package.
+### Node.js Server (Express)
+- `node-server/src/app.js`: Express server implementation with enhanced task management features
+- `node-server/package.json`: Node.js dependencies and scripts
+- `node-server/Dockerfile`: Docker configuration for Node.js server
 
-- `python-server/requirements.txt`: This file lists the dependencies required for the FastAPI server and other dependencies.
-
-- `python-server/Dockerfile`: This file is used to build a Docker image for the FastAPI server. It specifies the base image, copies the source code into the image, installs the dependencies, and sets the command to run the server.
-
-- `docker-compose.yml`: This file is used to define and run multi-container Docker applications. It specifies the services to run, their configurations, and any dependencies between them.
+### Configuration & Documentation
+- `docker-compose.yml`: Multi-container Docker configuration for both servers
+- `API.md`: Comprehensive API documentation for both servers
+- `MIGRATION.md`: Migration guide and feature comparison
 
 ## Getting Started
 
-To run the FastAPI server using Docker, follow these steps:
+To run both servers using Docker, follow these steps:
 
-- Build and start the Docker containers by running the following command:
+### Run Both Servers
+```shell
+docker compose up --build
+```
 
-  ```shell
-  docker compose up
-  ```
+This command will build and start both servers:
+- **Python FastAPI Server**: Available at http://localhost:8000
+- **Node.js Express Server**: Available at http://localhost:3000
 
-  This command will build the Docker image for the FastAPI server and start the containers defined in the `docker-compose.yml` file.
+### Run Individual Servers
+```shell
+# Python server only
+docker compose up python-server
 
-- The FastAPI server should now be running. You can access at port `8000`.
+# Node.js server only  
+docker compose up node-server
+```
 
 ## API Routes
 
-The FastAPI server provides the following API routes:
+### Python Server (Port 8000)
+- `GET /` - Returns "Hello World"
+- `POST /tasks` - Adds a task to the task list
+- `GET /tasks` - Retrieves the task list
 
-- `POST /tasks`: Adds a task to the task list. The request body should contain the task details.
+### Node.js Server (Port 3000)
+**Core Routes (matching Python server):**
+- `GET /` - Returns "Hello World"
+- `POST /tasks` - Adds a task to the task list
+- `GET /tasks` - Retrieves the task list
 
-- `GET /tasks`: Retrieves the task list.
+**Enhanced Routes (Node.js only):**
+- `PUT /tasks/:index` - Updates a task at the specified index
+- `DELETE /tasks/:index` - Deletes a task at the specified index
+- `GET /health` - Returns server health status and metrics
+
+## Testing the APIs
+
+### Test Python Server
+```bash
+# Get all tasks
+curl http://localhost:8000/tasks
+
+# Add a new task
+curl -X POST http://localhost:8000/tasks \
+  -H "Content-Type: application/json" \
+  -d '{"text": "Learn FastAPI"}'
+```
+
+### Test Node.js Server
+```bash
+# Get all tasks
+curl http://localhost:3000/tasks
+
+# Add a new task
+curl -X POST http://localhost:3000/tasks \
+  -H "Content-Type: application/json" \
+  -d '{"text": "Learn Express.js"}'
+
+# Update a task
+curl -X PUT http://localhost:3000/tasks/0 \
+  -H "Content-Type: application/json" \
+  -d '{"text": "Master Express.js"}'
+
+# Delete a task
+curl -X DELETE http://localhost:3000/tasks/0
+
+# Check server health
+curl http://localhost:3000/health
+```
+
+## Migration Benefits
+
+The Node.js implementation provides several enhancements over the Python version:
+
+- ✅ **Full CRUD Operations**: Complete Create, Read, Update, Delete functionality
+- ✅ **Enhanced Error Handling**: Comprehensive error middleware and validation
+- ✅ **Request Logging**: Built-in logging for debugging and monitoring
+- ✅ **Health Monitoring**: Dedicated health check endpoint
+- ✅ **Input Validation**: Robust validation for all user inputs
+- ✅ **Better Code Organization**: Modular structure with middleware
+
+## Technology Stack
+
+| Component | Python Server | Node.js Server |
+|-----------|---------------|----------------|
+| **Framework** | FastAPI | Express.js |
+| **Runtime** | Python 3.9 | Node.js 18 |
+| **Package Manager** | pip | npm |
+| **Server** | uvicorn | node |
+| **Port** | 8000 | 3000 |
+
+For more detailed information, see:
+- [API Documentation](./API.md)
+- [Migration Guide](./MIGRATION.md)
