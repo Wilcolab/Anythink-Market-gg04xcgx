@@ -32,7 +32,7 @@ docker compose up --build
 ```
 
 This command will build and start both servers:
-- **Python FastAPI Server**: Available at http://localhost:8001
+- **Python FastAPI Server**: Available at http://localhost:8000
 - **Node.js Express Server**: Available at http://localhost:3000
 
 ### Run Individual Servers
@@ -46,7 +46,7 @@ docker compose up node-server
 
 ## API Routes
 
-### Python Server (Port 8001)
+### Python Server (Port 8000)
 - `GET /` - Returns "Hello World"
 - `POST /tasks` - Adds a task to the task list
 - `GET /tasks` - Retrieves the task list
@@ -67,10 +67,10 @@ docker compose up node-server
 ### Test Python Server
 ```bash
 # Get all tasks
-curl http://localhost:8001/tasks
+curl http://localhost:8000/tasks
 
 # Add a new task
-curl -X POST http://localhost:8001/tasks \
+curl -X POST http://localhost:8000/tasks \
   -H "Content-Type: application/json" \
   -d '{"text": "Learn FastAPI"}'
 ```
@@ -116,7 +116,7 @@ The Node.js implementation provides several enhancements over the Python version
 | **Runtime** | Python 3.9 | Node.js 18 |
 | **Package Manager** | pip | npm |
 | **Server** | uvicorn | node |
-| **Port** | 8001 | 3000 |
+| **Port** | 8000 | 3000 |
 
 For more detailed information, see:
 - [API Documentation](./API.md)
