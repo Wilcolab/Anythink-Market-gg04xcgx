@@ -2,6 +2,19 @@
 
 This project contains both Python FastAPI and Node.js Express implementations of a task management API. It demonstrates server migration from Python to Node.js while maintaining feature parity and adding enhancements.
 
+## Servers and Ports
+
+### Python Server (FastAPI)
+- Running on ports 8000 and 8001 for compatibility
+- Provides the original task management implementation
+- Uses FastAPI and Pydantic for robust API development
+
+### Node.js Server (Express)
+- Running on port 3000
+- Provides a modernized implementation of the task management API
+- Features enhanced error handling and input validation
+- Compatible with the Python server's API format
+
 ## Project Structure
 
 The project has the following files and directories:
@@ -31,18 +44,26 @@ To run both servers using Docker, follow these steps:
 docker compose up --build
 ```
 
-This command will build and start both servers:
-- **Python FastAPI Server**: Available at http://localhost:8000
-- **Node.js Express Server**: Available at http://localhost:3000
+### Accessing the Servers
 
-### Run Individual Servers
-```shell
-# Python server only
-docker compose up python-server
+#### Python Server
+The Python server is accessible at:
+- http://localhost:8000 - Primary endpoint
+- http://localhost:8001 - Secondary endpoint (for compatibility)
 
-# Node.js server only  
-docker compose up node-server
-```
+Both ports serve identical endpoints:
+- `GET /` - Returns "Hello World"
+- `GET /tasks` - Lists all tasks
+- `POST /tasks` - Creates a new task
+
+#### Node.js Server
+The Node.js server is accessible at:
+- http://localhost:3000
+
+Available endpoints:
+- `GET /` - Returns "Hello World"
+- `GET /tasks` - Lists all tasks
+- `POST /tasks` - Creates a new task (with enhanced validation)
 
 ## API Routes
 
